@@ -17,17 +17,17 @@ function drawDetail(data, pohled, detail) {
   let teloData;
   if(pohled === 'kraj') {
     data = data.filter(d => d[0] == detail);
-    hlavickaData.shift();
-    teloData = data.map(function(d) {return d.slice(1);});
+    hlavickaData = hlavickaData.slice(1,2).concat(hlavickaData.slice(3));
+    teloData = data.map(function(d) {return d.slice(1,2).concat(d.slice(3));})
+    let avg = data.filter(d => d[1] == 'ø kraje');
+    console.log(data)
   } else if(pohled === 'strana') {
-    data = data.filter(d => d[1] == detail);
-//    hlavickaData = hlavickaData.slice(0, 1).concat(hlavickaData.slice(2));
-//    teloData = data.map(function(d) {return d.slice(0, 1).concat(d.slice(2))});
-    teloData = data.map(function(d) {return d});
+    data = data.filter(d => d[2].indexOf(detail) !== -1);
+    hlavickaData = hlavickaData.slice(0, 2).concat(hlavickaData.slice(3));
+    teloData = data.map(function(d) {return d.slice(0, 2).concat(d.slice(3))});
+    let avg = data.filter(d => d[0] == 'ø strany');
+    console.log(avg)
   }
-
-  console.log(hlavickaData);
-  console.log(teloData);
 
   $("#detail").html(`<table id="tabulka" class="display" style="width:100%"></table>`);
 
@@ -55,7 +55,7 @@ function drawDetail(data, pohled, detail) {
       url: "https://interaktivni.rozhlas.cz/tools/datatables/Czech.json",
     },
     columnDefs: [
-      { targets: 1, type: "diacritics-neutralise" }
+      { targets: 0, type: "diacritics-neutralise" }
     ],
   });
 
@@ -66,7 +66,7 @@ function drawSecondLevel(pohled) {
     let htmlSecondLevel = '<select id="secondLevelSelect"><option value="Středočeský">Středočeský</option><option value="Plzeňský">Plzeňský</option></select>';
     $("#secondLevel").html(htmlSecondLevel);
   } else if (pohled === 'strana') {
-    let htmlSecondLevel = '<select id="secondLevelSelect"><option value="ODS">ODS</option><option value="ČSSD">ČSSD</option></select>';
+    let htmlSecondLevel = '<select id="secondLevelSelect"><option value="001">KDU-ČSL</option><option value="053">ODS</option><option value="007">ČSSD</option></select>';
     $("#secondLevel").html(htmlSecondLevel);
   }
 }
