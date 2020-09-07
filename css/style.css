@@ -24,31 +24,11 @@ input[type=submit] {
   color: #fff;
 }
 
-#obec, #strany, #kandidati {
+#kandidatky, #secondLevel, #detail {
   padding-bottom: 10px;
 }
 
-.stranaKlik {
-  cursor: pointer;
-  color: #08519c;
-  font: 12px "Noticia Text",serif;
-  margin-bottom: 0;
-}
-
-button {
-  background-color: #2171b5; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  text-shadow: 0 0px 0 #fff;
-  display: inline-block;
-  font: 16px "Noticia Text",serif;
-  border-radius: 5px;
-}
-
-#krajSelect {
+#pohledSelect {
   margin-bottom: 30px;
 }
 
