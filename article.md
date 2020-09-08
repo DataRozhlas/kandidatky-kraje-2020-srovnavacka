@@ -23,6 +23,3 @@ options: [noheader, nopic]
 <div style="text-align: right;"><small>Zdroj dat: <a href="https://volby.cz/opendata/kz2020/kz2020_opendata.htm">volby.cz</a></small></div>
 
 </div></wide>
-
-výběr podle strany: teď není vidět do koalic
-
