@@ -56,3 +56,11 @@ input[type=submit] {
 .bold {
   font-weight:bold;
 }
+
+select:invalid {
+  color: gray;
+}
+
+option {
+  color: black;
+}

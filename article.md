@@ -9,11 +9,14 @@ options: [noheader, nopic]
 
 <wide><div id="kandidatky">
 
-<h3 id="pohled">Vyberte pohled</h3>
+<h3 id="pohled">Interaktivní kandidátky</h3>
 
-<select id="pohledSelect">
-  <option value="kraj">Srovnání kandidátek v kraji</option>
-  <option value="strana">Srovnání kandidátek strany</option>
+<select id="pohledSelect" required>
+  <option value="" disabled selected hidden>Vyberte srovnání</option>
+  <option value="kraj">Kraj</option>
+  <option value="strana">Strana</option>
+  <option value="kraje">Kraje navzájem</option>
+  <option value="strany">Strany navzájem</option>
 </select>
 
 <div id="secondLevel"></div>
@@ -23,3 +26,5 @@ options: [noheader, nopic]
 <div style="text-align: right;"><small>Zdroj dat: <a href="https://volby.cz/opendata/kz2020/kz2020_opendata.htm">volby.cz</a></small></div>
 
 </div></wide>
+
+

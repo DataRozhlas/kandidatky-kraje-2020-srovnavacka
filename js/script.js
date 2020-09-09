@@ -15,27 +15,24 @@ function loadData(pohled, detail) {
 function drawDetail(data, pohled, detail) {
   let hlavickaData = data[0];
   let teloData;
-  if(pohled === 'kraj') {
+
+  // podle kraje
+  if (pohled === 'kraj') {
     data = data.filter(d => d[0] == detail);
-    hlavickaData = hlavickaData.slice(1,2).concat(hlavickaData.slice(3));
-    teloData = data.map(function(d) {return d.slice(1,2).concat(d.slice(3));})
-/*    let avg = teloData.filter(d => d[0] == 'ø kraje');
-    teloData.forEach((row, index) => {
-      if(index > 0) {
-        let teloRadek = row;
-        for(let i = 1; i < teloRadek.length; i++) {
-          teloRadek[i] = String(parseInt(teloRadek[i]) - parseInt(avg[0][i]));
-        };
-      }
-    });
-*/
-  } else if(pohled === 'strana') {
+    hlavickaData = hlavickaData.slice(1, 2).concat(hlavickaData.slice(3));
+    teloData = data.map(function(d) {return d.slice(1, 2).concat(d.slice(3));})
+  } else if (pohled === 'strana') {
     data = data.filter(d => d[2].indexOf(detail) !== -1);
     hlavickaData = hlavickaData.slice(0, 2).concat(hlavickaData.slice(3));
     teloData = data.map(function(d) {return d.slice(0, 2).concat(d.slice(3))});
-/*    let avg = teloData.filter(d => d[0] == 'ø strany');
-    console.log(avg)
-*/
+  } else if (pohled === 'kraje') {
+    data = data.filter(d => d[1].indexOf('ø kraje') !== -1);
+    hlavickaData = hlavickaData.slice(0, 1).concat(hlavickaData.slice(3));
+    teloData = data.map(function(d) {return d.slice(0, 1).concat(d.slice(3))});
+  } else if (pohled === 'strany') {
+    data = data.filter(d => d[0].indexOf('ø strany') !== -1);
+    hlavickaData = hlavickaData.slice(1, 2).concat(hlavickaData.slice(3));
+    teloData = data.map(function(d) {return d.slice(1, 2).concat(d.slice(3));})
   }
 
   $("#detail").html(`<table id="tabulka" class="display" style="width:100%"></table>`);
@@ -54,10 +51,13 @@ function drawDetail(data, pohled, detail) {
   });
   $("#tabulka").append(telo);
 
+  let order;
   if(pohled === 'kraj') {
-    var order = 1;
+    order = 1;
   } else if (pohled === 'strana') {
-    var order = 2;
+    order = 2;
+  } else {
+    order = 1;
   }
 
   $("#tabulka").DataTable({
@@ -75,7 +75,6 @@ function drawDetail(data, pohled, detail) {
     ],
     fnRowCallback: function(nRow, aData, iDisplayIndex) {
       if ( (aData[0].indexOf('ø') !== -1) || (aData[1].indexOf('ø') !== -1) ) {
-        console.log('xxx')
         $('td', nRow).each(function() {
           $(this).addClass('bold');
         });
@@ -85,18 +84,11 @@ function drawDetail(data, pohled, detail) {
   });
 }
 
-$('#tabulka').dataTable( {
-  "rowCallback": function(row, data) {
-    if ( displayNum == 1 ) {
-      $('td:eq', row).html( '<b>ø kraje</b>' );
-    }
-  }
-} );
-
 function drawSecondLevel(pohled) {
-  if(pohled === 'kraj') {
-    let htmlSecondLevel = '<select id="secondLevelSelect">'
-    htmlSecondLevel += '<option value="Středočeský" selected>Středočeský</option>'
+  if (pohled === 'kraj') {
+    let htmlSecondLevel = '<select id="secondLevelSelect" required>'
+    htmlSecondLevel += '<option value="" disabled selected hidden>Vyberte kraj</option>'
+    htmlSecondLevel += '<option value="Středočeský">Středočeský</option>'
     htmlSecondLevel += '<option value="Jihočeský">Jihočeský</option>'
     htmlSecondLevel += '<option value="Plzeňský">Plzeňský</option>'
     htmlSecondLevel += '<option value="Karlovarský">Karlovarský</option>'
@@ -112,7 +104,8 @@ function drawSecondLevel(pohled) {
     htmlSecondLevel += '</select>';
     $("#secondLevel").html(htmlSecondLevel);
   } else if (pohled === 'strana') {
-    let htmlSecondLevel = '<select id="secondLevelSelect">'
+    let htmlSecondLevel = '<select id="secondLevelSelect" required>'
+    htmlSecondLevel += '<option value="" disabled selected hidden>Vyberte stranu</option>'
     htmlSecondLevel += '<option value="768">ANO</option>'
     htmlSecondLevel += '<option value="007">ČSSD</option>'
     htmlSecondLevel += '<option value="001">KDU-ČSL</option>'
@@ -128,13 +121,27 @@ function drawSecondLevel(pohled) {
   }
 }
 
-$('#pohledSelect').change(function(event){
+$('#pohledSelect').change(function(event) {
   var pohled = $("#pohledSelect").val();
-  drawSecondLevel(pohled);
+  $("#secondLevelSelect").html("");
+  $("#detail").html("");
+  if(pohled === 'kraj' || pohled === 'strana') {
+    drawSecondLevel(pohled);
+  } else {
+    loadData(pohled, '');
+  }
 });
 
-$('#secondLevel').change(function(event){
+$('#secondLevel').change(function(event) {
   var pohled = $("#pohledSelect").val();
   var detail = $("#secondLevelSelect").val();
   loadData(pohled, detail);
+});
+
+$('#tabulka').dataTable({
+  "rowCallback": function(row, data) {
+    if ( displayNum == 1 ) {
+      $('td:eq', row).html( '<b>ø kraje</b>' );
+    }
+  }
 });
