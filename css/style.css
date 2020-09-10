@@ -64,3 +64,15 @@ select:invalid {
 option {
   color: black;
 }
+
+.kandLink a {
+  cursor: pointer;
+  color: #08519c;
+  font: 12px "Noticia Text",serif;
+  margin-bottom: 0;
+}
+
+.pozn {
+  color: gray;
+  font: 12px "Noticia Text",serif;
+}

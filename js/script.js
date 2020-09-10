@@ -16,52 +16,109 @@ function drawDetail(data, pohled, detail) {
   let hlavickaData = data[0];
   let teloData;
 
-  // podle kraje
   if (pohled === 'kraj') {
-    data = data.filter(d => d[0] == detail);
-    hlavickaData = hlavickaData.slice(1, 2).concat(hlavickaData.slice(3));
-    teloData = data.map(function(d) {return d.slice(1, 2).concat(d.slice(3));})
+    teloData = data.filter(d => d[0] == detail);
   } else if (pohled === 'strana') {
-    data = data.filter(d => d[2].indexOf(detail) !== -1);
-    hlavickaData = hlavickaData.slice(0, 2).concat(hlavickaData.slice(3));
-    teloData = data.map(function(d) {return d.slice(0, 2).concat(d.slice(3))});
+    teloData = data.filter(d => d[2].indexOf(detail) !== -1);
   } else if (pohled === 'kraje') {
-    data = data.filter(d => d[1].indexOf('ø kraje') !== -1);
-    hlavickaData = hlavickaData.slice(0, 1).concat(hlavickaData.slice(3));
-    teloData = data.map(function(d) {return d.slice(0, 1).concat(d.slice(3))});
+    teloData = data.filter(d => d[1].indexOf('ø kraje') !== -1 || d[1].indexOf('ø kandidátka') !== -1);
   } else if (pohled === 'strany') {
-    data = data.filter(d => d[0].indexOf('ø strany') !== -1);
-    hlavickaData = hlavickaData.slice(1, 2).concat(hlavickaData.slice(3));
-    teloData = data.map(function(d) {return d.slice(1, 2).concat(d.slice(3));})
+    teloData = data.filter(d => d[0].indexOf('ø strany') !== -1 || d[0].indexOf('ø kandidátka') !== -1);
   }
 
   $("#detail").html(`<table id="tabulka" class="display" style="width:100%"></table>`);
 
   const hlavicka = $("<tr>");
-  hlavickaData.forEach(column => hlavicka.append($("<th>").html(column)));
+  hlavickaData.forEach(column => {
+    let suffix;
+    if (column === 'kraj' || column === 'koalice' || column === 'strana') {
+      suffix = '';
+    } else if (column === 'věk') {
+      suffix = ' (med.)';
+    } else if (column === 'obec') {
+      suffix = ' (med.) <br/> (× 1000 obyv.)';
+    } else {
+      suffix = ' (%)';
+    }
+    hlavicka.append($("<th>").html(column + '<div class="pozn">' + suffix + '</div>'))
+  });
   $("<thead>").appendTo("#tabulka").append(hlavicka);
 
+  let krajNr;
+  if (pohled === 'kraj') {
+    krajNr = teloData.filter(d => d[1].indexOf('ø kraje') !== -1);
+    krajNr = krajNr.map(function(value, index) { return value[2]; });
+  } else if (pohled === 'strana') {
+    krajNr = [2, 10, 4, 7, 6, 13, "", 11, 8, 3, 1, 5, 9, 12];
+  }
+
   const telo = $("<tbody>");
-  teloData.forEach((strana) => {
+  teloData.forEach((strana, jndex) => {
     const radek = $("<tr>");
     strana.forEach((column, index) => {
-      radek.append($("<td>").html(column));
+      if (pohled === 'kraj') {
+        if (index === 1 && column != 'ø kraje') {
+          radek.append($("<td>").html(`${column} <div class="kandLink"><a href="https://volby.cz/pls/kz2020/kz111?xjazyk=CZ&xkraj=${krajNr}&xstrana=${strana[4]}&xv=1&xt=1">kandidátka ↗</a></div>`));
+        } else {
+          radek.append($("<td>").html(column));
+        }
+      } else if (pohled === 'strana') {
+        if (index === 0 && column != 'ø strany') {
+          radek.append($("<td>").html(`${column} <div class="kandLink"><a href="https://volby.cz/pls/kz2020/kz111?xjazyk=CZ&xkraj=${krajNr[jndex]}&xstrana=${strana[4]}&xv=1&xt=1">kandidátka ↗</a></div>`));
+        } else {
+          radek.append($("<td>").html(column));
+        }
+      } else {
+        radek.append($("<td>").html(column));
+      }
     });
     $(telo).append(radek);
   });
   $("#tabulka").append(telo);
 
-  let order;
-  if(pohled === 'kraj') {
+  let param, order, avgCol;
+  if (pohled === 'kraj') {
     order = 1;
+    avgCol = 1;
+    param = [
+      {targets: 0, visible: false, searchable: false},
+      {targets: 2, visible: false, searchable: false},
+      {targets: 4, visible: false, searchable: false},
+      {targets: 1, type: "diacritics-neutralise"}
+    ];
   } else if (pohled === 'strana') {
-    order = 2;
-  } else {
+    order = 0;
+    avgCol = 0;
+    param = [
+      {targets: 1, visible: false, searchable: false},
+      {targets: 2, visible: false, searchable: false},
+      {targets: 4, visible: false, searchable: false},
+      {targets: 0, type: "diacritics-neutralise"}
+    ];
+  } else if (pohled === 'kraje') {
+    order = 0;
+    avgCol = 0;
+    param = [
+      {targets: 1, visible: false, searchable: false},
+      {targets: 2, visible: false, searchable: false},
+      {targets: 3, visible: false, searchable: false},
+      {targets: 4, visible: false, searchable: false},
+      {targets: 0, type: "diacritics-neutralise"}
+    ];
+  } else if (pohled === 'strany') {
     order = 1;
+    avgCol = 1;
+    param = [
+      {targets: 0, visible: false, searchable: false},
+      {targets: 2, visible: false, searchable: false},
+      {targets: 3, visible: false, searchable: false},
+      {targets: 4, visible: false, searchable: false},
+      {targets: 1, type: "diacritics-neutralise"}
+    ];
   }
 
   $("#tabulka").DataTable({
-    order: [[order, "desc"]],
+    order: [[order, "asc"]],
     responsive: true,
     ordering: true,
     paging: false,
@@ -69,12 +126,9 @@ function drawDetail(data, pohled, detail) {
     language: {
       url: "https://interaktivni.rozhlas.cz/tools/datatables/Czech.json",
     },
-    columnDefs: [
-      { targets: 0, type: "diacritics-neutralise" },
-      { targets: 1, type: "natural" }
-    ],
+    columnDefs: param,
     fnRowCallback: function(nRow, aData, iDisplayIndex) {
-      if ( (aData[0].indexOf('ø') !== -1) || (aData[1].indexOf('ø') !== -1) ) {
+      if (aData[avgCol].indexOf('ø') !== -1) {
         $('td', nRow).each(function() {
           $(this).addClass('bold');
         });
@@ -123,11 +177,12 @@ function drawSecondLevel(pohled) {
 
 $('#pohledSelect').change(function(event) {
   var pohled = $("#pohledSelect").val();
-  $("#secondLevelSelect").html("");
-  $("#detail").html("");
+  $("#secondLevelSelect").empty();
+  $("#detail").empty();
   if(pohled === 'kraj' || pohled === 'strana') {
     drawSecondLevel(pohled);
   } else {
+    $("#secondLevel").empty();
     loadData(pohled, '');
   }
 });
