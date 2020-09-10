@@ -58,13 +58,13 @@ function drawDetail(data, pohled, detail) {
     strana.forEach((column, index) => {
       if (pohled === 'kraj') {
         if (index === 1 && column != 'ø kraje') {
-          radek.append($("<td>").html(`${column} <div class="kandLink"><a href="https://volby.cz/pls/kz2020/kz111?xjazyk=CZ&xkraj=${krajNr}&xstrana=${strana[4]}&xv=1&xt=1">kandidátka ↗</a></div>`));
+          radek.append($("<td>").html(`${column} <div class="kandLink"><a href="https://volby.cz/pls/kz2020/kz111?xjazyk=CZ&xkraj=${krajNr}&xstrana=${strana[4]}&xv=1&xt=1" target="_blank">kandidátka ↗</a></div>`));
         } else {
           radek.append($("<td>").html(column));
         }
       } else if (pohled === 'strana') {
         if (index === 0 && column != 'ø strany') {
-          radek.append($("<td>").html(`${column} <div class="kandLink"><a href="https://volby.cz/pls/kz2020/kz111?xjazyk=CZ&xkraj=${krajNr[jndex]}&xstrana=${strana[4]}&xv=1&xt=1">kandidátka ↗</a></div>`));
+          radek.append($("<td>").html(`${column} <div class="kandLink"><a href="https://volby.cz/pls/kz2020/kz111?xjazyk=CZ&xkraj=${krajNr[jndex]}&xstrana=${strana[4]}&xv=1&xt=1" target="_blank">kandidátka ↗</a></div>`));
         } else {
           radek.append($("<td>").html(column));
         }
