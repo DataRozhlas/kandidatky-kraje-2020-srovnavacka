@@ -31,11 +31,11 @@ function drawDetail(data, pohled, detail) {
   const hlavicka = $("<tr>");
   hlavickaData.forEach(column => {
     let suffix;
-    if (column === 'kraj' || column === 'koalice' || column === 'strana') {
+    if (column === 'kraj' || column === 'koal.' || column === 'strana') {
       suffix = '';
     } else if (column === 'věk') {
       suffix = ' (med.)';
-    } else if (column === 'obec') {
+    } else if (column === 'bydl.') {
       suffix = ' (med.) <br/> (× 1000 obyv.)';
     } else {
       suffix = ' (%)';
