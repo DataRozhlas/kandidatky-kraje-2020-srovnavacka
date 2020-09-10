@@ -9,7 +9,7 @@ options: [noheader, nopic]
 
 <wide><div id="kandidatky">
 
-<h3 id="pohled">Interaktivní kandidátky</h3>
+<h3 id="pohled">Kdo kandiduje?</h3>
 
 <select id="pohledSelect" required>
   <option value="" disabled selected hidden>Vyberte srovnání</option>

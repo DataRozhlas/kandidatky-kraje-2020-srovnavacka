@@ -68,11 +68,19 @@ option {
 .kandLink a {
   cursor: pointer;
   color: #08519c;
-  font: 12px "Noticia Text",serif;
+  font: 12px "Noticia Text", serif;
   margin-bottom: 0;
 }
 
 .pozn {
   color: gray;
-  font: 12px "Noticia Text",serif;
+  font: 12px "Noticia Text", serif;
+}
+
+#tabulka {
+  font: 16px "Noticia Text", serif;
+}
+
+#tabulka td {
+  padding: 3px;
 }
