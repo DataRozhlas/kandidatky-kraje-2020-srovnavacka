@@ -28,16 +28,9 @@ input[type=submit] {
   padding-bottom: 10px;
 }
 
-#pohledSelect {
-  margin-bottom: 10px;
-}
-
-#stranyScroll {
-  padding-bottom: 30px;
-}
-
-#kandidatiScroll {
-  padding-bottom: 50px;
+#pohledSelect, #secondLevelSelect {
+  margin-bottom: 5px;
+  padding: 5px;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -54,7 +47,7 @@ input[type=submit] {
 }
 
 .bold {
-  font-weight:bold;
+  font-weight: bold;
 }
 
 select:invalid {
@@ -68,19 +61,24 @@ option {
 .kandLink a {
   cursor: pointer;
   color: #08519c;
-  font: 12px "Noticia Text", serif;
+  font-size: 11px;
   margin-bottom: 0;
 }
 
 .pozn {
   color: gray;
-  font: 12px "Noticia Text", serif;
+  font-size: 11px;
 }
 
 #tabulka {
-  font: 16px "Noticia Text", serif;
+  font-size: 14px;
 }
 
-#tabulka td {
-  padding: 3px;
+#tabulka td, th {
+  padding: 2px 8px !important;
+  text-align: left;
+}
+
+#kandidatky {
+  font-family: 'Asap';
 }
