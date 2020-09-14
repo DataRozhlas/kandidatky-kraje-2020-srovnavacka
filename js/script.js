@@ -170,6 +170,7 @@ function drawSecondLevel(pohled) {
     htmlSecondLevel += '<option value="720">Piráti</option>'
     htmlSecondLevel += '<option value="166">STAN</option>'
     htmlSecondLevel += '<option value="1114">SPD</option>'
+    htmlSecondLevel += '<option value="721">TOP 09</option>'
     htmlSecondLevel += '</select>';
     $("#secondLevel").html(htmlSecondLevel);
   }
