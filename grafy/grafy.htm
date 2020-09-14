@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Asap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+</head>
+
+<body>
+
+<div id="demo" style="width:600px; height:400px"></div>
+
+<div id="tits" style="width:600px; height:400px"></div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/modules/annotations.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/modules/treemap.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+
+var colors = {
+    'muzi': '#3E80B6',
+    'zeny': '#E63946',
+    'nic': '#DDD',
+    'ing': '#3E80B6',
+    'mgr': '#009FB8',
+    'bc': '#7CB5EC',
+    'mudr': '#E63946',
+    'judr': '#FF6666',
+    'vice': '#FF9c9c',
+    'ostatni': '#666'
+}
+
+var vek = [18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88];
+
+var muzi = [8,24,28,40,40,56,48,60,66,74,64,77,69,99,96,94,123,128,130,137,175,142,140,211,205,203,225,199,228,202,223,223,189,182,179,181,208,187,196,163,151,142,143,128,121,121,127,128,94,105,97,71,75,67,52,37,35,12,22,15,12,7,1,5,9,0,1,1,0,0,1],
+    zeny = [10,9,15,22,19,23,26,20,25,22,21,26,25,32,31,40,50,51,49,49,48,44,65,56,60,66,88,78,94,74,91,68,74,77,92,82,74,79,82,71,59,57,63,38,50,49,38,28,44,24,30,13,18,10,20,12,7,7,5,4,2,2,2,1,2,0,1,1,0,0,1];
+
+Highcharts.chart('tits', {
+
+    chart: {
+        type: 'treemap',
+        layoutAlgorithm: 'squarified',
+        style: {
+           fontFamily: 'Asap'
+        }
+    },
+
+    title: {
+        text: 'Vysokoškolské vzdělání kandidátů'
+    },
+
+    tooltip: {
+        valueSuffix: ' kandidátů'
+    },
+
+    exporting: {
+        enabled: false
+    },
+
+    credits: {
+        text: 'volby.cz',
+        href: 'https://volby.cz/opendata/kz2020/kz2020_opendata.htm'
+    },
+
+    series: [{
+        data: [{
+            name: 'bez vzdělání',
+            value: 5081,
+            color: colors.nic
+        }, {
+            name: 'Ing.',
+            value: 1857,
+            color: colors.ing
+        }, {
+            name: 'Mgr.',
+            value: 1245,
+            color: colors.mgr
+        }, {
+            name: 'Bc.',
+            value: 578,
+            color: colors.bc
+        }, {
+            name: 'MUDr.',
+            value: 254,
+            color: colors.mudr
+        }, {
+            name: 'JUDr.',
+            value: 103,
+            color: colors.judr
+        }, {
+            name: 'více',
+            value: 325,
+            color: colors.vice
+        }, {
+            name: 'ostatní',
+            value: 283,
+            color: colors.ostatni
+        }]
+    }]
+});
+
+Highcharts.chart('demo', {
+
+    chart: {
+        type: 'line',
+        style: {
+           fontFamily: 'Asap'
+        }
+    },
+
+    title: {
+        text: 'Věk a pohlaví kandidátů'
+    },
+
+    xAxis: {
+        categories: vek,
+        title: {
+            text: 'věk'
+        },
+    },
+
+    yAxis: {
+        title: {
+            text: 'počet kandidátů'
+        },
+        labels: {
+            formatter: function () {
+                return this.value + '';
+            }
+        }
+    },
+
+    annotations: [{
+        labelOptions: {
+            backgroundColor: 'rgba(255,255,255,0.5)',
+            verticalAlign: 'top',
+            y: 15,
+            align: 'right',
+            justify: false,
+            crop: false,
+            style: {
+                fontSize: '0.8em',
+                textOutline: '1px white'
+            }
+        },
+        labels: [{
+            point: {
+                xAxis: 0,
+                yAxis: 0,
+                x: 19,
+                y: 137
+            },
+            x: -20,
+            y: -100,
+            text: '<b>37 let, muž, Ing./Mgr.</b><br/>Typický zástupce Pirátů.<br/>Z parlamentních stran<br/>mají nejnižší věk<br/>a relativně málo žen.'
+        }, {
+            point: {
+                xAxis: 0,
+                yAxis: 0,
+                x: 30,
+                y: 223
+            },
+            x: 100,
+            y: 60,
+            text: '<b>48 let, muž, Ing.</b><br/>Průměrný kandidát.<br/>Pokud má VŠ vzdělání,<br/>pak nejčastěji inženýrské.<br/>Jen 27 % kandidátů jsou ženy.'
+        }, {
+            point: {
+                xAxis: 0,
+                yAxis: 0,
+                x: 37,
+                y: 187
+            },
+            x: 200,
+            y: -50,
+            text: '<b>55 let, muž, Ing.</b><br/>Průměrný zástupce KSČM,<br/>nejstarší strany v parlamentu.'
+        }]
+    }],
+
+    tooltip: {
+        headerFormat: '<span style="font-size: 10px">{point.key} let</span><br/>',
+        valueSuffix: ' kandidátů',
+        shared: true
+    },
+
+    exporting: {
+        enabled: false
+    },
+
+    credits: {
+        text: 'volby.cz',
+        href: 'https://volby.cz/opendata/kz2020/kz2020_opendata.htm'
+    },
+
+    plotOptions: {
+        line: {
+            marker: {
+                symbol: 'circle'
+            }
+        }
+    },
+
+    series: [{
+        name: 'muži',
+        data: muzi,
+        color: colors.muzi
+    }, {
+        name: 'ženy',
+        data: zeny,
+        color: colors.zeny
+    }]
+});
+
+</script>
+</html>
