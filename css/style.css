@@ -82,3 +82,17 @@ option {
 #kandidatky {
   font-family: 'Asap';
 }
+
+td.sorting_1::before {
+  left: auto !important;
+  top: auto !important;
+    right: 4px !important;
+    bottom: 4px !important;
+}
+
+td::before {
+  left: auto !important;
+  top: auto !important;
+    right: 4px !important;
+    bottom: 4px !important;
+}

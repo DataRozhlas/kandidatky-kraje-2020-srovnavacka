@@ -82,7 +82,8 @@ function drawDetail(data, pohled, detail) {
       {targets: 0, visible: false, searchable: false},
       {targets: 2, visible: false, searchable: false},
       {targets: 4, visible: false, searchable: false},
-      {targets: 1, type: "diacritics-neutralise"}
+      {targets: 1, type: "diacritics-neutralise"},
+      {targets: 8, type: "natural"}
     ];
   } else if (pohled === 'strana') {
     order = 0;
@@ -91,7 +92,8 @@ function drawDetail(data, pohled, detail) {
       {targets: 1, visible: false, searchable: false},
       {targets: 2, visible: false, searchable: false},
       {targets: 4, visible: false, searchable: false},
-      {targets: 0, type: "diacritics-neutralise"}
+      {targets: 0, type: "diacritics-neutralise"},
+      {targets: 8, type: "natural"}
     ];
   } else if (pohled === 'kraje') {
     order = 0;
@@ -101,7 +103,8 @@ function drawDetail(data, pohled, detail) {
       {targets: 2, visible: false, searchable: false},
       {targets: 3, visible: false, searchable: false},
       {targets: 4, visible: false, searchable: false},
-      {targets: 0, type: "diacritics-neutralise"}
+      {targets: 0, type: "diacritics-neutralise"},
+      {targets: 8, type: "natural"}
     ];
   } else if (pohled === 'strany') {
     order = 1;
@@ -111,7 +114,8 @@ function drawDetail(data, pohled, detail) {
       {targets: 2, visible: false, searchable: false},
       {targets: 3, visible: false, searchable: false},
       {targets: 4, visible: false, searchable: false},
-      {targets: 1, type: "diacritics-neutralise"}
+      {targets: 1, type: "diacritics-neutralise"},
+      {targets: 8, type: "natural"}
     ];
   }
 

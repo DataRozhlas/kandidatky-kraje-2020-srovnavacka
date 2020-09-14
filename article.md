@@ -1,4 +1,4 @@
-title: "Interaktivní kandidátky: proklikejte si, kdo kandiduje ve vašem kraji"
+title: "Málo žen, hodně inženýrů. Kdo se uchází o hlasy ve vašem kraji? Proklikejte si kandidátky"
 perex: "Typický kandidát v nadcházejících krajských volbách? Muž, čtyřicátník či padesátník, inženýr. Žen je na kandidátkách sotva čtvrtina, mediánový věk kandidátů je 48 let a mezi vysokoškolsky vzdělanými je s převahou nejčastější titul <i>Ing.</i>, nosí ho přes čtyřicet procent z nich."
 coverimg:
 coverimg_note: ""
@@ -6,11 +6,11 @@ styles: ["https://fonts.googleapis.com/css2?family=Asap", "https://cdn.datatable
 libraries: [jquery, datatables, highcharts, "https://cdn.datatables.net/plug-ins/1.10.19/sorting/diacritics-sort.js", "https://cdn.datatables.net/plug-ins/1.10.21/sorting/natural.js", "https://code.highcharts.com/modules/annotations.js", "https://code.highcharts.com/modules/treemap.js"]
 options: [noheader, nopic]
 ---
-Zavedené politické strany demografické oživení do krajské politiky nepřinesou: kandidátní listiny parlamentních stran mají zpravidla ještě méně žen, vyšší věkový průměr a více inženýrů než zmíněná typická kandidátka. Jsou jen dvě výjimky: Piráti jsou podstatně mladší a SPD má výrazně méně inženýrů; to je ovšem důsledek toho, že trpí nedostatkem vysokoškolsky vzdělaných kandidátů ve všech oborech.
+Zavedené politické strany demografické oživení do krajské politiky nepřinesou: kandidátní listiny parlamentních stran mají zpravidla ještě méně žen, vyšší věkový průměr a více inženýrů než zmíněná typická kandidátka. Jsou jen dvě výjimky: Piráti jsou podstatně mladší a SPD má výrazně méně inženýrů; to je ovšem důsledek toho, že má nedostatek vysokoškolsky vzdělaných kandidátů ve všech oborech.
 
 <div id="demo" style="width:100%; height:400px"></div>
 
-Kritickým nedostatkem mladé krve trpí KSČM a ODS – ve třinácti krajích mají jedinou lídryni a ani jeden z krajských lídrů nemá méně než 40 let. Jen o něco lépe jsou na tom ostatní parlamentní strany. Mezi slepými jsou výjimkou jen jednoocí Piráti se třemi lídryněmi a devíti kandidáty pod čtyřicítkou.
+Kritickým nedostatkem ženského elementu a mladé krve trpí KSČM i ODS – obě strany mají ve třinácti krajích jedinou lídryni a ani jeden z jejich lídrů nemá méně než 40 let. Jen o něco lépe jsou na tom ostatní parlamentní strany. Mezi slepými jsou výjimkou jen Piráti se třemi lídryněmi a devíti kandidáty pod čtyřicítkou.
 
 Kandidátní listiny prozrazují také bydliště politiků. Snadno tak lze dopočítat typickou velikost obce, odkud se kandidáti každé strany rekrutují. Mezi parlamentními stranami jsou na „městském“ konci spektra Piráti, na „vesnickém“ Starostové a nezávislí.
 
